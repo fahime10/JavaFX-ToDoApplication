@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #BDB5D5;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.todoapplication.controller.SignupController">
+   <children>
+      <AnchorPane prefHeight="71.0" prefWidth="600.0" style="-fx-background-color: #CC5500;">
+         <children>
+            <Label layoutX="228.0" layoutY="31.0" text="To Do Application" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="71.0" prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: #BB4400;">
+         <children>
+            <Label layoutX="260.0" layoutY="8.0" text="Sign up form" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <TextField fx:id="signupFirstName" layoutX="181.0" layoutY="121.0" prefHeight="25.0" prefWidth="247.0" promptText="First Name" />
+      <TextField fx:id="signupLastName" layoutX="181.0" layoutY="159.0" prefHeight="25.0" prefWidth="247.0" promptText="Last Name" />
+      <TextField fx:id="signupUsername" layoutX="181.0" layoutY="200.0" prefHeight="25.0" prefWidth="247.0" promptText="Username" />
+      <TextField fx:id="signupLocation" layoutX="181.0" layoutY="316.0" prefHeight="25.0" prefWidth="247.0" promptText="Location" />
+      <CheckBox fx:id="signupCheckboxMale" layoutX="226.0" layoutY="288.0" mnemonicParsing="false" selected="true" text="Male" />
+      <CheckBox fx:id="signupCheckboxFemale" layoutX="324.0" layoutY="288.0" mnemonicParsing="false" text="Female" />
+      <PasswordField fx:id="signupPassword" layoutX="181.0" layoutY="240.0" prefHeight="25.0" prefWidth="247.0" promptText="Password" />
+      <Button fx:id="signupSubmitButton" layoutX="180.0" layoutY="351.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="247.0" style="-fx-background-color: #C21E56;" text="Submit" textFill="WHITE" />
+   </children>
+</AnchorPane>
