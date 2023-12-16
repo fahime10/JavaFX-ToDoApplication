@@ -2,10 +2,7 @@ package com.example.todoapplication.database;
 
 import com.example.todoapplication.model.User;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class DatabaseHelper extends Config {
     Connection dbConnection;
@@ -42,5 +39,28 @@ public class DatabaseHelper extends Config {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public ResultSet getUser(User user) {
+        ResultSet result = null;
+
+        if (!user.getUsername().equals("") || !user.getPassword().equals("")) {
+            String query = "SELECT * FROM " + Const.USER_TABLE + " WHERE " + Const.USERNAME +
+                           "=?" + " AND " + Const.PASSWORD + "=?";
+
+            try {
+                PreparedStatement preparedStatement = getDbConnection().prepareStatement(query);
+                preparedStatement.setString(1, user.getUsername());
+                preparedStatement.setString(2, user.getPassword());
+
+                result = preparedStatement.executeQuery();
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Please enter your credentials");
+        }
+
+        return result;
     }
 }

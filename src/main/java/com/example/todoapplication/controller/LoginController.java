@@ -1,5 +1,7 @@
 package com.example.todoapplication.controller;
 
+import com.example.todoapplication.database.DatabaseHelper;
+import com.example.todoapplication.model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,6 +14,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginController {
@@ -33,10 +37,11 @@ public class LoginController {
     @FXML
     private TextField username;
 
+    private DatabaseHelper databaseHelper;
+
     @FXML
     void initialize() {
-        String loginUsername = username.getText().trim();
-        String loginPassword = password.getText().trim();
+        databaseHelper = new DatabaseHelper();
 
         loginSignupButton.setOnAction(event -> {
             loginSignupButton.getScene().getWindow().hide();
@@ -56,15 +61,26 @@ public class LoginController {
         });
 
         loginButton.setOnAction(event -> {
-            if (!loginUsername.equals("") && !loginPassword.equals("")) {
-                loginUser(loginUsername, loginPassword);
-            } else {
-                System.out.println("Error logging in...");
+            User user = new User();
+
+            user.setUsername(username.getText().trim());
+            user.setPassword(password.getText().trim());
+
+            ResultSet result = databaseHelper.getUser(user);
+
+            int counter = 0;
+
+            try {
+                while (result.next()) {
+                    counter++;
+                }
+
+                if (counter == 1) {
+                    System.out.println("Login Successful");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         });
-    }
-
-    private void loginUser(String username, String password) {
-
     }
 }

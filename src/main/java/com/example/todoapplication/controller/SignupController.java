@@ -70,6 +70,5 @@ public class SignupController {
         User user = new User(firstName, lastName, username, password, location, gender);
 
         databaseHelper.addNewUser(user);
-
     }
 }
