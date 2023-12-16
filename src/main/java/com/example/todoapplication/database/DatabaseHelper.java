@@ -1,5 +1,7 @@
 package com.example.todoapplication.database;
 
+import com.example.todoapplication.model.User;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -19,8 +21,7 @@ public class DatabaseHelper extends Config {
         return dbConnection;
     }
 
-    public void addNewUser(String firstName, String lastName, String username,
-                           String password, String location, String gender) {
+    public void addNewUser(User user) {
         String query = "INSERT INTO " + Const.USER_TABLE + "(" + Const.FIRST_NAME +
                         ", " + Const.LAST_NAME + ", " + Const.USERNAME + ", " +
                         Const.PASSWORD + ", " + Const.LOCATION + ", " + Const.GENDER + ") " +
@@ -29,12 +30,12 @@ public class DatabaseHelper extends Config {
         try {
             PreparedStatement preparedStatement = getDbConnection().prepareStatement(query);
 
-            preparedStatement.setString(1, firstName);
-            preparedStatement.setString(2, lastName);
-            preparedStatement.setString(3, username);
-            preparedStatement.setString(4, password);
-            preparedStatement.setString(5, location);
-            preparedStatement.setString(6, gender);
+            preparedStatement.setString(1, user.getFirstName());
+            preparedStatement.setString(2, user.getLastName());
+            preparedStatement.setString(3, user.getUsername());
+            preparedStatement.setString(4, user.getPassword());
+            preparedStatement.setString(5, user.getLocation());
+            preparedStatement.setString(6, user.getGender());
 
             preparedStatement.executeUpdate();
 

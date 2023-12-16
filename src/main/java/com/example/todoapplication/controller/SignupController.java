@@ -1,6 +1,7 @@
 package com.example.todoapplication.controller;
 
 import com.example.todoapplication.database.DatabaseHelper;
+import com.example.todoapplication.model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -46,9 +47,29 @@ public class SignupController {
         DatabaseHelper databaseHelper = new DatabaseHelper();
 
         signupSubmitButton.setOnAction(event -> {
-            databaseHelper.addNewUser(signupFirstName.getText(), signupLastName.getText(),
-                                      signupUsername.getText(), signupPassword.getText(),
-                                      signupLocation.getText(), "Female");
+            createUser();
         });
+    }
+
+    private void createUser() {
+        DatabaseHelper databaseHelper = new DatabaseHelper();
+
+        String firstName = signupFirstName.getText();
+        String lastName = signupLastName.getText();
+        String username = signupUsername.getText();
+        String password = signupPassword.getText();
+        String location = signupLocation.getText();
+        String gender = "";
+
+        if (signupCheckboxFemale.isSelected()) {
+            gender = "Female";
+        } else if (signupCheckboxMale.isSelected()) {
+            gender = "Male";
+        }
+
+        User user = new User(firstName, lastName, username, password, location, gender);
+
+        databaseHelper.addNewUser(user);
+
     }
 }
