@@ -8,6 +8,7 @@ module com.example.todoapplication {
     requires org.kordamp.bootstrapfx.core;
 
     requires com.jfoenix;
+    requires java.sql;
 
     opens com.example.todoapplication to javafx.fxml;
     exports com.example.todoapplication;
