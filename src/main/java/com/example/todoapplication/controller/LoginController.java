@@ -1,15 +1,14 @@
 package com.example.todoapplication.controller;
 
+import com.example.todoapplication.animations.Shaker;
 import com.example.todoapplication.database.DatabaseHelper;
 import com.example.todoapplication.model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,6 +18,9 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginController {
+    @FXML
+    private AnchorPane window;
+
     @FXML
     private ResourceBundle resources;
 
@@ -42,6 +44,8 @@ public class LoginController {
     @FXML
     void initialize() {
         databaseHelper = new DatabaseHelper();
+        Alert error = new Alert(Alert.AlertType.ERROR);
+        error.setTitle("Error");
 
         loginSignupButton.setOnAction(event -> {
             loginSignupButton.getScene().getWindow().hide();
@@ -77,9 +81,19 @@ public class LoginController {
 
                 if (counter == 1) {
                     System.out.println("Login Successful");
+                } else {
+                    Shaker shaker = new Shaker(window);
+                    shaker.shake();
+                    error.setContentText("Please provide correct credentials");
+                    error.show();
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                System.out.println("Something went wrong with the database...");
+            } catch (NullPointerException e) {
+                Shaker shaker = new Shaker(window);
+                shaker.shake();
+                error.setContentText("No credentials have been provided");
+                error.show();
             }
         });
     }

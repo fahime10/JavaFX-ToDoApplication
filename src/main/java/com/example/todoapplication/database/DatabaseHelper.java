@@ -57,8 +57,6 @@ public class DatabaseHelper extends Config {
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-        } else {
-            System.out.println("Please enter your credentials");
         }
 
         return result;
